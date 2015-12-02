@@ -13,11 +13,14 @@ angular.module('tripito.viewLocation', ['ngRoute'])
   $scope.header = {
     name: {name: "Name", sortable:'true', width: '20%'},
     address: {name: "Address", sortable:'true', width: ''},
-    owner: {name: "Owner", sortable:'true', width: '20%'}
+    owner_name: {name: "Owner", sortable:'true', width: '20%'}
   };
 
   $http.get('viewLocation/data.json').then(function(res){
     $scope.locations = res.data;
+    for (var i = 0; i < $scope.locations.length; i++) {
+      $scope.locations[i].owner_name = $scope.locations[i].owner.name;
+    };
   });
 
   $scope.sort = {
