@@ -1,1 +1,19 @@
-<p>This is the partial for view 1.</p>
+<div class="main" ng-controller="ViewLocation1Ctrl">
+  <table class="tripito-table">
+    <thead>
+      <tr>
+        <th ng:repeat="(i, data) in header" ng:click="changeSorting(i)" width="{{ data.width }}">
+          {{ data.name }}
+          <span ng-if="i == sort.column" ng:class="selectedCls(i)"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng:repeat="location in locations | orderBy : sort.column : sort.descending">
+        <td>{{ location.name }}</td>
+        <td>{{ location.address }}</td>
+        <td>{{ location.owner }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
