@@ -3,10 +3,9 @@
 // Declare app level module which depends on views, and components
 angular.module('tripito', [
   'ngRoute',
-  'tripito.view1',
-  'tripito.view2',
+  'tripito.viewLocation',
   'tripito.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/location'});
 }]);
