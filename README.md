@@ -1,8 +1,5 @@
 # Tripito — Small Sample of AngularJS 
 
-The seed app doesn't do much.
-
-
 ## Getting Started
 
 ### Prerequisites
@@ -46,7 +43,7 @@ this server is:
 npm start
 ```
 
-Now browse to the app at `http://localhost:8000/app/index.html`.
+Now browse to the app at http://localhost:8000/app/.
 
 
 ## Contact
