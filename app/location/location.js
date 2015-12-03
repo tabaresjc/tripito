@@ -9,15 +9,6 @@ angular.module('tripito.location', ['ngRoute'])
   });
 }])
 
-.controller('ViewLocationCtrl', ['$scope', '$http', '$route', 'mainInfo', function($scope, $http, $route, mainInfo) {
-  mainInfo.getData().then(function(result){
-    var locations = result.data;
-    for (var i = 0; i < locations.length; i++) {
-      // TODO: find a cleaner way to fetch individual records
-      if(locations[i].id == $route.current.params.id) {
-        $scope.location = angular.copy(locations[i]);
-        break;
-      }
-    };
-  });
+.controller('ViewLocationCtrl', ['$scope', '$http', '$route', 'dataContainer', function($scope, $http, $route, dataContainer) {
+  $scope.location = dataContainer.getItem($route.current.params.id);
 }]);
