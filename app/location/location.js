@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('tripito.viewLocation', ['ngRoute'])
+angular.module('tripito.location', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/location', {
-    templateUrl: 'viewLocation/index.html',
+    templateUrl: 'location/index.html',
     controller: 'ViewLocation1Ctrl'
   });
 }])
@@ -16,7 +16,7 @@ angular.module('tripito.viewLocation', ['ngRoute'])
     owner_name: {name: "Owner", sortable:'true', width: '20%'}
   };
 
-  $http.get('viewLocation/data.json').then(function(res){
+  $http.get('location/data.json').then(function(res){
     $scope.locations = res.data;
     for (var i = 0; i < $scope.locations.length; i++) {
       $scope.locations[i].owner_name = $scope.locations[i].owner.name;
