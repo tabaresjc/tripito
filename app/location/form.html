@@ -1,0 +1,52 @@
+<form name="locationForm" class="simple-form">
+    <div class="form-body">
+        <table>
+            <tr>
+                <td colspan="2">
+                    <input type="text" ng-model="data.name" name="name" required class="input-large" />
+                    <div ng-messages="locationForm.name.$error" class="alert alert-danger">
+                        <div ng-messages-include="components/messages/form-messages.html"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>
+                    <input type="text" ng-model="data.address" name="address" required />
+                    <div ng-messages="locationForm.address.$error" class="alert alert-danger">
+                        <div ng-messages-include="components/messages/form-messages.html"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Owner:</td>
+                <td>
+                    <select ng-model="data.owner" ng-options="owner.name for owner in owners track by owner.id">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Latitude:</td>
+                <td>
+                    <input type="text" ng-model="data.location.latitude" name="latitude" required ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" />
+                    <div ng-messages="locationForm.latitude.$error" class="alert alert-danger">
+                        <div ng-messages-include="components/messages/form-messages.html"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Longitude:</td>
+                <td>
+                    <input type="text" ng-model="data.location.longitude" name="longitude" required ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" />
+                    <div ng-messages="locationForm.longitude.$error" class="alert alert-danger">
+                        <div ng-messages-include="components/messages/form-messages.html"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-panel">
+        <a href="javascript:void(0);" class="btn btn-white" ng-click="cancel()">Cancel</a>
+        <a href="javascript:void(0);" class="btn btn-blue" ng-click="submit()" ng-class="{'invalid-form': !locationForm.$valid}">Save</a>
+    </div>
+</form>

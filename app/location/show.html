@@ -1,5 +1,5 @@
-<div class="container-detail clearfix" ng-controller="ViewLocationCtrl" ng-if="location">
-  <div class="content-detail clearfix">
+<div class="container-detail" ng-controller="LocationShowCtrl" ng-if="location">
+  <div class="content-detail">
     <h2>{{ location.name }}</h2>
     <table>
       <tr>
@@ -19,13 +19,13 @@
         <td>{{ location.location.longitude }}</td>
       </tr>
     </table>
+    <a href="#/location/{{ location.id }}/edit">Edit</a>
   </div>
-  <div id="map-container" class="content-map clearfix">
+  <div id="map-container" class="content-map">
     <map data-latitude="{{ location.location.latitude }}" 
          data-longitude="{{ location.location.longitude }}"
          data-zoom="10"
          data-scrollto="map-container">
     </map>
   </div>
-
 </div>
