@@ -19,18 +19,15 @@ angular.module('tripito', [
 
 
 // Declare the starting point
-.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('MainCtrl', ['$scope', '$http', 'mainInfo', function($scope, $http, mainInfo) {
   $scope.header = {
     name: {name: "Name", sortable:'true', width: '30%'},
     address: {name: "Address", sortable:'true', width: ''},
     owner_name: {name: "Owner", sortable:'true', width: '30%'}
   };
-
-  $http.get('data/items.json').then(function(res){
-    $scope.locations = res.data;
-    for (var i = 0; i < $scope.locations.length; i++) {
-      $scope.locations[i].owner_name = $scope.locations[i].owner.name;
-    };
+  $scope.locations = [];
+  mainInfo.getData().then(function(result){
+    $scope.locations = result.data;
   });
 
   $scope.sort = {
@@ -58,6 +55,14 @@ angular.module('tripito', [
 
   $scope.location = null;
 }])
+
+
+.service('mainInfo', function ($http) {
+  this.getData = function()
+  {
+    return $http.get('data/items.json');      
+  }
+})
 
 // ************************************************
 // Google Map Reusable directive component 
