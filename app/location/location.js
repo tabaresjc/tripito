@@ -3,46 +3,21 @@
 angular.module('tripito.location', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/location', {
+  $routeProvider.when('/location/:id', {
     templateUrl: 'location/index.html',
-    controller: 'ViewLocation1Ctrl'
+    controller: 'ViewLocationCtrl'
   });
 }])
 
-.controller('ViewLocation1Ctrl', ['$scope', '$http', function($scope, $http) {
-  $scope.header = {
-    name: {name: "Name", sortable:'true', width: '20%'},
-    address: {name: "Address", sortable:'true', width: ''},
-    owner_name: {name: "Owner", sortable:'true', width: '20%'}
-  };
-
-  $http.get('location/data.json').then(function(res){
-    $scope.locations = res.data;
-    for (var i = 0; i < $scope.locations.length; i++) {
-      $scope.locations[i].owner_name = $scope.locations[i].owner.name;
+.controller('ViewLocationCtrl', ['$scope', '$http', '$route', function($scope, $http, $route) {
+  $http.get('data/items.json').then(function(res){
+    var locations = res.data;
+    for (var i = 0; i < locations.length; i++) {
+      // TODO: find a cleaner way to fetch individual records
+      if(locations[i].id == $route.current.params.id) {
+        $scope.location = angular.copy(locations[i]);
+        break;
+      }
     };
   });
-
-  $scope.sort = {
-    column: 'name',
-    descending: false
-  };
-
-  $scope.selectedCls = function(column) {
-    var cls_name = '';
-    if(column == $scope.sort.column) {
-      cls_name = 'sort-' + $scope.sort.descending
-    }
-    return cls_name;
-  };
-
-  $scope.changeSorting = function(column) {
-    var sort = $scope.sort;
-    if (sort.column == column) {
-        sort.descending = !sort.descending;
-    } else {
-        sort.column = column;
-        sort.descending = false;
-    }
-  };
 }]);

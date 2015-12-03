@@ -108,6 +108,21 @@ Layout styles
 	padding: 1em 1.25em;
 }
 
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 /* -----------------------
 Nav
 ------------------------*/
@@ -250,7 +265,7 @@ Tables
     font-size: inherit;
     margin: 0;
     overflow: visible; 
-    padding: 0.5em 1em; 
+    padding: 0.5em;
 }
 
 .tripito-table td:first-child,
@@ -298,16 +313,26 @@ Tables
 }
 
 /* -----------------------
+Page detail
+------------------------*/
+.container-detail {padding: 10px; border: 1px solid #333; margin: 10px 0; display: inline-block;width: 100%}
+.container-detail > div {margin: 0; display: block;float: left;}
+.container-detail .content-detail {width: 60%; padding-right: 10px;}
+.container-detail .content-detail table {border: none;}
+.container-detail .content-detail td,
+.container-detail .content-detail th {border: 0;padding: 0.5em 0.5em 0.5em 0;}
+.container-detail .content-map {width: 38%; height: 180px;}
+.container-detail .content-map .map {width: 100%; height: 180px;padding: 0;margin: 0;background-color: #ccc;}
+/* -----------------------
 Wide styles
 ------------------------*/
 
-@media (min-width: 42em)
-{
+@media (min-width: 42em){
 	.header { padding: 1.5em 3em; }
 	.nav-bar { padding: 1em 3em; }
 	.content { padding: 2em 3em; }
 	.footer { padding: 2em 3em; }
-	
+
 	.nav li
 	{
 		display: inline;
@@ -320,4 +345,12 @@ Wide styles
 		padding: 0;
 		border-bottom: 0;
 	}
+}
+
+@media (max-width: 42em){
+	body {font-size: 0.8em}
+	.container-detail {padding: 8px; display: block;margin-left:-8px;}
+	.container-detail > div {margin: 0; padding: 0; display: block; float: none;}
+	.container-detail .content-detail {width: 100%;}
+	.container-detail .content-map {width: 100%; margin-top: 20px;}
 }

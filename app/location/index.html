@@ -1,20 +1,31 @@
-<div class="main" ng-controller="ViewLocation1Ctrl">
-  <table class="tripito-table">
-    <thead>
+<div class="container-detail clearfix" ng-controller="ViewLocationCtrl" ng-if="location">
+  <div class="content-detail clearfix">
+    <h2>{{ location.name }}</h2>
+    <table>
       <tr>
-        <th ng:repeat="(i, data) in header" ng:click="changeSorting(i)" width="{{ data.width }}">
-          {{ data.name }}
-          <span ng-if="i == sort.column" ng:class="selectedCls(i)"></span>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng:repeat="location in locations | orderBy : sort.column : sort.descending">
-        <td><a href="javascript:;" ng:click="selectedView(i)">{{ location.name }}</a></td>
+        <td>Address</td>
         <td>{{ location.address }}</td>
+      </tr>
+      <tr>
+        <td>Owner</td>
         <td>{{ location.owner.name }}</td>
       </tr>
-    </tbody>
-  </table>
-  <div></div>
+      <tr>
+        <td>Latitude</td>
+        <td>{{ location.location.latitude }}</td>
+      </tr>
+      <tr>
+        <td>Longitude</td>
+        <td>{{ location.location.longitude }}</td>
+      </tr>
+    </table>
+  </div>
+  <div id="map-container" class="content-map clearfix">
+    <map data-latitude="{{ location.location.latitude }}" 
+         data-longitude="{{ location.location.longitude }}"
+         data-zoom="10"
+         data-scrollto="map-container">
+    </map>
+  </div>
+
 </div>
