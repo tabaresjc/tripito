@@ -12,48 +12,50 @@
   <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body>
-  <div class="header">
-    <div class="container">
-      <h1 class="header-heading">Tripito</h1>
-    </div>
-  </div>
-  <div class="nav-bar">
-    <div class="container">
-      <!--[if lt IE 7]>
-          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-      <![endif]-->
-      <ul class="nav">
-        <li><a href="#/">Home</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="content">
-    <div class="container">
-      <div class="alert alert-danger" ng-show="flash.getMessage()">
-        <b>Alert!</b>
-        <p>{{flash.getMessage()}}</p>
+  <div class="wrapper">
+    <div class="header">
+      <div class="container">
+        <h1 class="header-heading">Tripito</h1>
       </div>
-      <div class="main" ng-controller="MainCtrl">
-        <table class="tripito-table">
-          <thead>
-            <tr>
-              <th ng:repeat="(i, data) in header" ng:click="changeSorting(i)" width="{{ data.width }}">
-                {{ data.name }}
-                <span ng-if="i == sort.column" ng:class="selectedCls(i)"></span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng:repeat="location in locations | orderBy : sort.column : sort.descending">
-              <td><a href="#/location/{{ location.id }}">{{ location.name }}</a></td>
-              <td>{{ location.address }}</td>
-              <td>{{ location.owner.name }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div ng-view></div>
     </div>
+    <div class="nav-bar">
+      <div class="container">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <ul class="nav">
+          <li><a href="#/">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <div class="container">
+        <div class="main" ng-controller="MainCtrl">
+          <div class="sub-header">
+            <a class="btn btn-white" href="#/location/new">+ Add New</a>
+          </div>
+          <table class="tripito-table">
+            <thead>
+              <tr>
+                <th ng:repeat="(i, data) in header" ng:click="changeSorting(i)" width="{{ data.width }}">
+                  {{ data.name }}
+                  <span ng-if="i == sort.column" ng:class="selectedCls(i)"></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng:repeat="location in locations | orderBy : sort.column : sort.descending">
+                <td><a href="#/location/show/{{ location.id }}">{{ location.name }}</a></td>
+                <td>{{ location.address }}</td>
+                <td>{{ location.owner.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-view></div>
+      </div>
+    </div>
+    <div class="push"></div>
   </div>
   <div class="footer">
     <div class="container">

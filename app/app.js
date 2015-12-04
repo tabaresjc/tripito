@@ -116,6 +116,7 @@ angular.module('tripito', [
       // this is neccesary, to make owner's name sortable
       item.owner_name = item.owner.name;
       items.push(item);
+      return item;
     };
 
     dataContainer.updateItem = function(itemId, data) {

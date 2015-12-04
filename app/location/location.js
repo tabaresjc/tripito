@@ -4,18 +4,30 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider
-  .when('/location/:id', {
+  .when('/location/show/:id', {
     templateUrl: 'location/show.html',
     controller: 'LocationShowCtrl'
   })
-  .when('/location/:id/edit', {
+  .when('/location/new', {
+    templateUrl: 'location/new.html',
+    controller: 'LocationNewCtrl'
+  })
+  .when('/location/edit/:id', {
     templateUrl: 'location/edit.html',
     controller: 'LocationEditCtrl'
   });
 }])
 
-.controller('LocationShowCtrl', ['$scope', '$http', '$route', 'dataContainer', function($scope, $http, $route, dataContainer) {
-  $scope.location = dataContainer.getItem($route.current.params.id);
+.controller('LocationShowCtrl', ['$scope', '$http', '$route', '$location', 'dataContainer', function($scope, $http, $route, $location, dataContainer) {
+  var locationId = $route.current.params.id;
+  var location = angular.copy(dataContainer.getItem(locationId));
+
+  if(!location.id) {
+    alert('There is no property with id: ' + locationId);
+    $location.path('/');
+  }
+
+  $scope.location = location;
 }])
 
 .controller('LocationEditCtrl', ['$scope', '$http', '$route', '$location', 'dataContainer', function($scope, $http, $route, $location, dataContainer) {
@@ -23,21 +35,33 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
   var location = angular.copy(dataContainer.getItem(locationId));
 
   if(!location.id) {
-    $location.path('/location');
     alert('There is no property with id: ' + locationId);
+    $location.path('/');
   }
-
-  $scope.location = location;
 
   $scope.onSubmit = function() {
     dataContainer.updateItem(locationId, location);
-    $location.path('/location/'+locationId);
-    alert('Property was Saved!!');
+    $location.path('/location/show/'+locationId);
   };
 
   $scope.onCancel = function() {
-    $location.path('/location/'+locationId);
-    alert('Operation aborted ');
+    $location.path('/location/show/'+locationId);
+  };
+}])
+
+
+.controller('LocationNewCtrl', ['$scope', '$http', '$route', '$location', 'dataContainer', function($scope, $http, $route, $location, dataContainer) {
+  var location = {};
+  $scope.location = location;
+
+  $scope.onSubmit = function() {
+    var item = dataContainer.addItem(location);
+    alert('Property was created!');
+    $location.path('/location/show/'+item.id);
+  };
+
+  $scope.onCancel = function() {
+    $location.path('/');
   };
 }])
 
