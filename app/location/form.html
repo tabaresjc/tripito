@@ -47,6 +47,6 @@
     </div>
     <div class="form-panel">
         <a href="javascript:void(0);" class="btn btn-white" ng-click="cancel()">Cancel</a>
-        <a href="javascript:void(0);" class="btn btn-blue" ng-click="submit()" ng-class="{'invalid-form': !locationForm.$valid}">Save</a>
+        <button class="btn btn-blue" ng-disabled="locationForm.$invalid" ng-click="submit()">Save</button>
     </div>
 </form>

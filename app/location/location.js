@@ -76,7 +76,6 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
     restrict: 'E',
     controller: 'locationFormEditCtrl',
     scope: {data: "=ngModel", submit: '&onSubmit', cancel: '&onCancel'},
-    require: 'ngModel',
     templateUrl: 'location/form.html'
   };
 });
