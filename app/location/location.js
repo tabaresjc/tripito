@@ -39,6 +39,8 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
     $location.path('/');
   }
 
+  $scope.location = location;
+
   $scope.onSubmit = function() {
     dataContainer.updateItem(locationId, location);
     $location.path('/location/show/'+locationId);
