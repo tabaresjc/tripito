@@ -42,7 +42,11 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
   $scope.location = location;
 
   $scope.onSubmit = function() {
-    dataContainer.updateItem(locationId, location);
+    var item = dataContainer.updateItem(locationId, location);
+    if(!item) {
+      alert('Please check the form and fill the required fields.');
+      return;
+    }
     $location.path('/location/show/'+locationId);
   };
 
@@ -58,6 +62,10 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
 
   $scope.onSubmit = function() {
     var item = dataContainer.addItem(location);
+    if(!item) {
+      alert('Please check the form and fill the required fields.');
+      return;
+    }
     alert('Property was created!');
     $location.path('/location/show/'+item.id);
   };

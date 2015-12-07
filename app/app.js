@@ -101,6 +101,10 @@ angular.module('tripito', [
     };
 
     dataContainer.addItem = function(item) {
+      if(!item || !item.name || !item.owner || !item.address || !item.location) {
+        return false;
+      }
+
       if(!item.id) {
         item.id = 1;
         if(items.length) {
@@ -121,13 +125,15 @@ angular.module('tripito', [
 
     dataContainer.updateItem = function(itemId, data) {
       var item = dataContainer.getItem(itemId);
-      if(!item) return false;
+      if(!item || !data.name || !data.owner || !data.address || !data.location) {
+        return false;
+      }
       item.name = data.name;
       item.address = data.address;
       item.owner = data.owner;
       item.location = data.location;
       item.owner_name = data.owner.name;
-      return true;
+      return item;
     };
 
     return dataContainer;
