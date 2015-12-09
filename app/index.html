@@ -32,9 +32,9 @@
       <div class="container">
         <div class="main" ng-controller="MainCtrl">
           <div class="sub-header">
-            <a class="btn btn-white" href="#/location/new">+ Add New</a>
+            <a class="btn btn-white" href="#/location/new" scroll-to="main-view">+ Add New</a>
           </div>
-          <table class="tripito-table">
+          <table class="tripito-table" scroll-hide ng-class="{'table-hide': !divshow}">
             <thead>
               <tr>
                 <th ng:repeat="(i, data) in header" ng:click="changeSorting(i)" width="{{ data.width }}">
@@ -45,14 +45,14 @@
             </thead>
             <tbody>
               <tr ng:repeat="location in locations | orderBy : sort.column : sort.descending">
-                <td><a href="#/location/show/{{ location.id }}">{{ location.name }}</a></td>
+                <td><a href="#/location/show/{{ location.id }}" scroll-to="main-view">{{ location.name }}</a></td>
                 <td>{{ location.address }}</td>
                 <td>{{ location.owner.name }}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div ng-view></div>
+        <div id="main-view" ng-view ></div>
       </div>
     </div>
     <div class="push"></div>

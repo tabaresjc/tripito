@@ -62,6 +62,7 @@ angular.module('tripito', [
   };
 
   $scope.location = null;
+  $scope.divshow = true;
 })
 
 
@@ -145,7 +146,6 @@ angular.module('tripito', [
 // ************************************************
 // <map data-latitude="34.1223"
 //      data-longitude="212256"
-//      data-scrollto="ID_OF_ELEMENT"
 //      data-zoom="10"></map>
 .directive('map', function(){
   return {
@@ -165,12 +165,38 @@ angular.module('tripito', [
         position: myPosition,
         map: map,
       });
-
-      if(attrs.scrollto) {
-        var el = document.getElementById(attrs.scrollto);
-        el.scrollIntoView(true);
-      }
     },
     template: '<div id="location-map" class="map"><div ng-transclude></div></div>'
+  };
+})
+
+.directive('scrollHide', ['$window', function ($window) {
+  return {
+    link: function ($scope, iElm, iAttrs) {
+      var height = 0,
+          offset = 100; // use offset to hide div sooner than expected
+      angular.element($window).bind("scroll", function () {
+        if(!height) {
+          height = iElm[0].offsetHeight - offset;
+        }
+        var thisWindow = this;
+        $scope.$apply(function(){
+          $scope.divshow = thisWindow.pageYOffset < height;
+        });
+      })
+    }
+  };
+}])
+
+.directive('scrollTo', function ($location, $anchorScroll) {
+  return function(scope, element, attrs) {
+    element.bind('click', function(event) {
+      event.stopPropagation();
+      console.log(attrs);
+      if(attrs.scrollTo) {
+        var el = document.getElementById(attrs.scrollTo);
+        el.scrollIntoView(true);
+      }
+    });
   };
 });

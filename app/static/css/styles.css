@@ -137,8 +137,18 @@ Layout styles
 .footer, .push {
   height: 50px; /* .push must be the same height as .footer */
 }
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 .footer {background: #000;color: #fff}
 .footer .container {background-color: #000; width: 100%}
+
+#main-view {
+  min-height: 800px;
+}
 
 /* -----------------------
 Nav
@@ -365,7 +375,13 @@ Tables
     border: 1px solid #cbcbcb;
     width: 100%;
     border: 5px;
+    margin-bottom: 50px;
 }
+.tripito-table {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+.tripito-table.table-hide { opacity:0;  }
 
 .tripito-table caption {
     color: #000;
@@ -492,5 +508,6 @@ Wide styles
 	.container-detail > div {margin: 0; padding: 0; display: block; float: none;}
 	.container-detail .content-detail {width: 100%;}
 	.container-detail .content-map {width: 100%; margin-top: 20px;}
-    .form-body .input-large {width:98%}
+  .form-body .input-large {width:98%}
+  .sub-header {padding-top: 10px}
 }

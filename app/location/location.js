@@ -26,7 +26,10 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
     alert('There is no property with id: ' + locationId);
     $location.path('/');
   }
-
+  setTimeout(function() {
+    var el = document.getElementById('main-view');
+    el.scrollIntoView(true);
+  }, 500);
   $scope.location = location;
 }])
 
@@ -53,6 +56,11 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
   $scope.onCancel = function() {
     $location.path('/location/show/'+locationId);
   };
+
+  setTimeout(function() {
+    var el = document.getElementById('main-view');
+    el.scrollIntoView(true);
+  }, 500);
 }])
 
 
@@ -73,6 +81,11 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
   $scope.onCancel = function() {
     $location.path('/');
   };
+
+  setTimeout(function() {
+    var el = document.getElementById('main-view');
+    el.scrollIntoView(true);
+  }, 500);
 }])
 
 
