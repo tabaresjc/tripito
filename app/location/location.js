@@ -80,6 +80,8 @@ angular.module('tripito.location', ['ngRoute', 'ngMessages',])
 
   $scope.onCancel = function() {
     $location.path('/');
+    var el = document.getElementById('main-table-data');
+    el.scrollIntoView(true);
   };
 
   setTimeout(function() {
